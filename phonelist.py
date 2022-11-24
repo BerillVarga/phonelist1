@@ -1,5 +1,14 @@
-import sqlite3
-conn = sqlite3.connect("phone.db")
+#import sqlite3
+#conn = sqlite3.connect("phone.db")
+
+import psycopg2
+conn = psycopg2.connect(
+        host="localhost",
+        port="5432",
+        database="phone",
+        user="postgres",
+        password="dataLove"
+        )
 
 def read_phonelist(C):
     cur = C.cursor()
