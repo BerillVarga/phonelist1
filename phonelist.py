@@ -16,14 +16,19 @@ def read_phonelist(C):
     rows = cur.fetchall()
     cur.close()
     return rows
+
 def add_phone(C, name, phone, address):
     cur = C.cursor()
     cur.execute(f"INSERT INTO phonelist VALUES ('{name}', '{phone}', '{address}');")
     cur.close()
+
 def delete_phone(C, name):
     cur = C.cursor()
-    cur.execute(f"DELETE FROM phonelist WHERE name = '{name}';")
+    cur.execute(f"SELECT id FROM phonelist WHERE name = '{name}';")
+    ids = cur.fetchall()
+    cur.execute(f"DELETE FROM phonelist WHERE id = '{ids[0][0]}';")
     cur.close()
+
 def save_phonelist(C):
     cur = C.cursor()
     try:
